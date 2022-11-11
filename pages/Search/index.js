@@ -3,27 +3,56 @@ import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import like from '../../images/Like.png'
 import source from '../../images/source.png'
+import Down from '../../images/Down.png'
 import { isMedia, getMediaLink, getMedia } from '../../Functions/Media'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 export const getServerSideProps = async (context) => {
   const q = context.query.q
-  console.log(q)
   const name = q
   const res = await fetch(`https://www.reddit.com/r/${q}.json?limit=25`)
-  const data = await res.json()
+  var data = await res.json()
+  data = (data.error !== 404) ? data : await fetch(`https://www.reddit.com/user/${q}.json?limit=25`)
+
+  try{
+    data = await data.json()
+  }catch{}
+
 
   return {
     props: {
-      redData: data,
+      redData_: data,
       name
     }
   }
 }
   
 
-export default function SubRed( {redData, name} ) {
+export default function SubRed( {redData_, name} ) {
+  const router = useRouter()
+  const [redData, setredData] = useState(redData_)
 
-  
+    const loadMoreData = async () => {
+
+      const res = await fetch(`https://www.reddit.com/r/${name}.json?limit=25&after=${redData.data.after}`)
+      var newdata = await res.json()
+      newdata = (newdata.error !== 404) ? newdata : await fetch(`https://www.reddit.com/user/${name}.json?limit=25&after=${redData.data.after}`)
+
+      try{
+        newdata = await newdata.json()
+      }catch{}
+ 
+      newdata.data.children.map((c) => {
+        setredData(redData.data.children.push(c))
+      })
+
+      redData.data.after = newdata.data.after
+      redData.data.dist += newdata.data.dist
+      setredData(redData)
+
+      router.push(`/Search?q=${name}`);
+    } 
 
   return (
     <div className={styles.container}>
@@ -33,9 +62,10 @@ export default function SubRed( {redData, name} ) {
         <link rel="icon" href="/Reddder.png" type='png' />
       </Head>
 
+
       <div className={styles.bodyContainer}>
-        <p>{name}:</p>
-        {(typeof(redData.data.children[0]) === "undefined") ? <p>Enter a correct subreddit!!!</p> :
+        <p>{name} :</p>
+        {((redData.error === 404) || (typeof(redData.data.children[0]) === "undefined")) ? <p>Enter a correct subreddit or username !!!</p> :
           <div className={styles.contentContainer}>
             {redData.data.children.map((child) => (
               isMedia(child.data.url) &&
@@ -67,6 +97,10 @@ export default function SubRed( {redData, name} ) {
           </div>
         }
       </div>
+      <div className={styles.loadMoreContainer}>
+        <Image src={Down} className={styles.loadMoreButton} alt='pic' width={40} onClick={loadMoreData}/>
+      </div>
     </div>
+    
   )
 }

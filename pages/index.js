@@ -3,6 +3,10 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import like from '../images/Like.png'
 import source from '../images/source.png'
+import Down from '../images/Down.png'
+import { isMedia, getMedia, getMediaLink } from '../Functions/Media'
+import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 
 
 export const getStaticProps = async () => {
@@ -11,45 +15,48 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      redData: data
+      redData_: data
     },
     revalidate: 10,
   }
 }
 
-export default function Home({ redData }) {
+export default function Home({ redData_ }) {
 
-  const isMedia = (e) => {
-    if(isImage(e) || isVideo(e)){
-      return true;
-    } 
-    return false
-  }
+  const router = useRouter()
+  const [redData, setredData] = useState(redData_)
 
-  const isImage = (e) => {
-    if(e.includes("png") || e.includes("jpg") ||e.includes("jpeg")){
-      return true;
-    } 
-    return false
-  }
-  const isVideo = (e) => {
-    if(e.includes("redgif") || e.includes("mp4") || e.includes("gifv")){
-      return true;
-    } 
-    return false
-  }
+  const [scrollY, setScrollY] = useState(0);
 
-  const getMedia = (e) => {
-    if(isImage(e.url) && (typeof(e.url) !== "undefined")){
-      return (<img src={e.url} alt='pic' className={styles.srcContentPic}/>)
-    }
-    else if((isVideo(e.url) && (typeof(e.preview.reddit_video_preview) !== "undefined")) || ((e.is_video) && typeof(e.media.reddit_video.fallback_url) !== "undefined")) {
-      return (<video src={(typeof(e.preview.reddit_video_preview) !== "undefined") ? e.preview.reddit_video_preview.fallback_url : e.media.reddit_video.fallback_url} 
-              preload='auto' controls vol className={styles.srcContentPic}/>) 
-    }
-  }
-  const getMediaLink = (e) => {
-    return getMedia(e).props.src
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+
+  }, []);
+
+  const loadMoreData = async () => {
+
+    const res = await fetch(`https://www.reddit.com/r/popular.json?limit=25&after=${redData.data.after}`)
+    var newdata = await res.json()
+
+    newdata.data.children.map((c) => {
+      setredData(redData.data.children.push(c))
+    })
+
+    redData.data.after = newdata.data.after
+    redData.data.dist += newdata.data.dist
+    setredData(redData)
+
+    router.push(`/`);
+    window.scrollY = scrollY
   }
 
   return (
@@ -93,6 +100,9 @@ export default function Home({ redData }) {
             ))}
           </div>
         }
+      </div>
+      <div className={styles.loadMoreContainer}>
+        <Image src={Down} className={styles.loadMoreButton} alt='pic' width={40} onClick={loadMoreData}/>
       </div>
     </div>
   )

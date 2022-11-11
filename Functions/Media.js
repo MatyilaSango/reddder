@@ -1,6 +1,7 @@
 import styles from '../styles/Home.module.css'
 
 export const isMedia = (e) => {
+    if(typeof(e) === "undefined") return false
     if(e.includes("png") || e.includes("jpg") ||e.includes("jpeg") || e.includes("gif") || e.includes("mp4")){
       return true;
     } 
@@ -21,12 +22,14 @@ export const isVideo = (e) => {
   }
 
 export const getMedia = (e) => {
-    if(isVideo(e.url) && (typeof(e.preview.reddit_video_preview) !== "undefined")){
-      return (<video src={e.preview.reddit_video_preview.fallback_url} preload='auto' controls className={styles.srcContentPic}/>)
-    }
-    else if(isImage(e.url) && (typeof(e.url) !== "undefined")){
-      return (<img src={e.url} alt='pic' className={styles.srcContentPic}/>)
-    }
+    try{
+      if(isVideo(e.url) && (typeof(e.preview.reddit_video_preview) !== "undefined")){
+        return (<video src={e.preview.reddit_video_preview.fallback_url} preload='auto' controls className={styles.srcContentPic}/>)
+      }
+      else if(isImage(e.url) && (typeof(e.url) !== "undefined")){
+        return (<img src={e.url} alt='pic' className={styles.srcContentPic}/>)
+      }
+    }catch{}
     
   }
 export const getPreviewMedia = (e) => {
@@ -42,7 +45,7 @@ export const getMediaLink = (e) => {
     try{
         return getMedia(e).props.src
     }catch{
-        console.log(getMedia(e))
+        
     }
     
     
