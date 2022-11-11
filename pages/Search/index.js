@@ -5,9 +5,10 @@ import like from '../../images/Like.png'
 import source from '../../images/source.png'
 
 export const getServerSideProps = async (context) => {
-    const {params} = context
-    const {name} = params
-    const res = await fetch(`https://www.reddit.com/r/${name}.json?limit=25`)
+    const q = context.query.q
+    console.log(q)
+    const name = q
+    const res = await fetch(`https://www.reddit.com/r/${q}.json?limit=25`)
     const data = await res.json()
   
     return {
@@ -51,7 +52,9 @@ export default function SubRed( {redData, name} ) {
     
   }
 
-  
+  const getMediaLink = (e) => {
+    return getMedia(e).props.src
+  }
 
   return (
     <div className={styles.container}>
@@ -63,12 +66,14 @@ export default function SubRed( {redData, name} ) {
 
       <div className={styles.bodyContainer}>
         <p>{name}:</p>
-        {((redData.error === 404) || (typeof(redData.data.children[0]) === "undefined")) ? <p>Enter a subreddit!!!</p> :
+        {(typeof(redData.data.children[0]) === "undefined") ? <p>Enter a subreddit!!!</p> :
           <div className={styles.contentContainer}>
             {redData.data.children.map((child) => (
               isMedia(child.data.url) &&
               <div className={styles.contentDiv}>
-                {getMedia(child.data)}
+                <a href={`/Preview?l=${getMediaLink(child.data)}&t=${child.data.title}&u=${child.data.ups}&s=${"https://www.reddit.com/"+child.data.permalink}`}>
+                  {getMedia(child.data)}
+                </a>
   
                 <div className={styles.contentBottomFlowDiv}>
                   <div className={styles.picTitle}>
@@ -95,4 +100,4 @@ export default function SubRed( {redData, name} ) {
       </div>
     </div>
   )
-  }
+}

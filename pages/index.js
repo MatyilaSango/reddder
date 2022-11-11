@@ -13,7 +13,7 @@ export const getStaticProps = async () => {
     props: {
       redData: data
     },
-    revalidate: 5
+    revalidate: 10,
   }
 }
 
@@ -48,6 +48,9 @@ export default function Home({ redData }) {
               preload='auto' controls vol className={styles.srcContentPic}/>) 
     }
   }
+  const getMediaLink = (e) => {
+    return getMedia(e).props.src
+  }
 
   return (
     <div className={styles.container}>
@@ -64,7 +67,9 @@ export default function Home({ redData }) {
             {redData.data.children.map((child) => (
               isMedia(child.data.url) &&
               <div className={styles.contentDiv}>
-                {getMedia(child.data)}
+                <a href={`/Preview?l=${getMediaLink(child.data)}&t=${child.data.title}&u=${child.data.ups}&s=${"https://www.reddit.com/"+child.data.permalink}`}>
+                  {getMedia(child.data)}
+                </a>
   
                 <div className={styles.contentBottomFlowDiv}>
                   <div className={styles.picTitle}>

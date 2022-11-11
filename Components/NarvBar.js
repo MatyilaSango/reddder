@@ -16,7 +16,7 @@ export default function NarvBar() {
     if(!e.currentTarget.elements[0].name) return
     const param = e.currentTarget.elements[0].value
 
-    router.push(`/Search/${param}`)
+    router.push(`/Search/?q=${param}`)
    
   };
   
