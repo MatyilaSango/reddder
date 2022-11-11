@@ -13,12 +13,7 @@ export const getServerSideProps = async (context) => {
   const name = q
   const res = await fetch(`https://www.reddit.com/r/${q}.json?limit=25`)
   var data = await res.json()
-  data = (data.error !== 404) ? data : await fetch(`https://www.reddit.com/user/${q}.json?limit=25`)
-
-  try{
-    data = await data.json()
-  }catch{}
-
+  data = (data.error !== 404) ? data : await fetch(`https://www.reddit.com/user/${q}.json?limit=25`).then((res) => data = res.json())
 
   return {
     props: {
