@@ -24,4 +24,7 @@ yarn dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 
+## Deployed on Vercel
+
+Link to the site: [reddder-matyilasango.vercel.app](reddder-matyilasango.vercel.app)
 
