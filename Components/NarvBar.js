@@ -20,10 +20,13 @@ export default function NarvBar() {
    
   };
   
+  const toHome = () => {
+    router.push("/")
+  }
 
   return (
     <Container className={styles.narvBar}>
-      <Image className={styles.logo} src={redder} alt='Reddder' height={40} />
+      <Image className={styles.logo} src={redder} alt='Reddder' height={40}  onClick={toHome}/>
       <SearchContainer className={styles.searchContainer}>
         <form className={styles.searchForm} onSubmit={searchHandler}>
           <input className={styles.searchInput} type='text' name='r' placeholder='Search...' required />

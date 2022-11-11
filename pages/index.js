@@ -12,14 +12,15 @@ export const getStaticProps = async () => {
   return {
     props: {
       redData: data
-    }
+    },
+    revalidate: 5
   }
 }
 
 export default function Home({ redData }) {
 
   const isMedia = (e) => {
-    if(e.includes("png") || e.includes("jpg") ||e.includes("jpeg") || e.includes("gif") || e.includes("mp4")){
+    if(isImage(e) || isVideo(e)){
       return true;
     } 
     return false
@@ -42,8 +43,9 @@ export default function Home({ redData }) {
     if(isImage(e.url) && (typeof(e.url) !== "undefined")){
       return (<img src={e.url} alt='pic' className={styles.srcContentPic}/>)
     }
-    else if(isVideo(e.url) && (typeof(e.preview.reddit_video_preview) !== "undefined")){
-      return (<video src={e.preview.reddit_video_preview.fallback_url} preload='auto' controls vol className={styles.srcContentPic}/>)
+    else if((isVideo(e.url) && (typeof(e.preview.reddit_video_preview) !== "undefined")) || ((e.is_video) && typeof(e.media.reddit_video.fallback_url) !== "undefined")) {
+      return (<video src={(typeof(e.preview.reddit_video_preview) !== "undefined") ? e.preview.reddit_video_preview.fallback_url : e.media.reddit_video.fallback_url} 
+              preload='auto' controls vol className={styles.srcContentPic}/>) 
     }
   }
 
@@ -56,32 +58,36 @@ export default function Home({ redData }) {
       </Head>
 
       <div className={styles.bodyContainer}>
-        <div className={styles.contentContainer}>
-          {redData.data.children.map((child) => (
-            <div className={styles.contentDiv}>
-              {getMedia(child.data)}
-              
-              <div className={styles.contentBottomFlowDiv}>
-                <div className={styles.picTitle}>
-                  <div className={styles.srcPic}>
-                    <a href={"https://www.reddit.com/"+child.data.permalink} target='_blank'>
-                      <Image src={source} alt='pic' width={40}/>
-                    </a>
+        <p>Popular:</p>
+        {(typeof(redData.data.children[0]) === "undefined") ? <p>Enter a subreddit!!!</p> :
+          <div className={styles.contentContainer}>
+            {redData.data.children.map((child) => (
+              isMedia(child.data.url) &&
+              <div className={styles.contentDiv}>
+                {getMedia(child.data)}
+  
+                <div className={styles.contentBottomFlowDiv}>
+                  <div className={styles.picTitle}>
+                    <div className={styles.srcPic}>
+                      <a href={"https://www.reddit.com/"+child.data.permalink} target='_blank'>
+                        <Image src={source} alt='pic' width={40}/>
+                      </a>
+                    </div>
+                    <div className={styles.srcTitle}>
+                      <>{child.data.title}</>
+                    </div>
                   </div>
-                  <div className={styles.srcTitle}>
-                    <>{child.data.title}</>
+                  
+                  <div className={styles.srcLikes}>
+                    <Image src={like} alt='pic' width={25} />
+                    <>{child.data.ups}</>
                   </div>
                 </div>
                 
-                <div className={styles.srcLikes}>
-                  <Image src={like} alt='pic' width={25} />
-                  <>{child.data.ups}</>
-                </div>
               </div>
-
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        }
       </div>
     </div>
   )
