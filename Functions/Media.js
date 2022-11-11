@@ -39,5 +39,11 @@ export const getPreviewMedia = (e) => {
 }
 
 export const getMediaLink = (e) => {
-    return getMedia(e).props.src
+    try{
+        return getMedia(e).props.src
+    }catch{
+        console.log(getMedia(e))
+    }
+    
+    
   }
