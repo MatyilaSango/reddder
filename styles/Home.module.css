@@ -1,129 +1,132 @@
-.container {
-  padding: 0 2rem;
+.layout{
+    width: 100vw;
 }
-
-.main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer {
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-}
-
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
-
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-}
-
-.title,
-.description {
-  text-align: center;
-}
-
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
-}
-
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
-}
-
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
-}
-
-.card {
-  margin: 1rem;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
-}
-
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
-}
-
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
-}
-
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
-}
-
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
-}
-
-@media (max-width: 600px) {
-  .grid {
+.narvBar{
     width: 100%;
-    flex-direction: column;
+    height: 84px;
+    background-color: #222222;
+    display: flex;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px 0 #000000;
+}
+.searchForm{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.searchInput{
+    width: calc(100% - 30px);
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+.searchInput:focus{
+    border: none;
+    outline: none;
+}
+.searchContainer{
+    width: 300px;
+    height: 30px;
+    border: 1px solid #E67058;
+    background-color: transparent;
+    border-radius: 15px;
+    padding-left: 10px;
+}
+.searchButton{
+    background-color: transparent;
+    width: auto;
+    padding: 0;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+}
+.searchButton:active{
+    background-color: rgba(255, 255, 255, 0.224);
+}
+.bodyContainer{
+    width: 100vw;
+    min-height: 100vh;
+    padding: 0 2rem;
+    padding-top: 10px;
+}
+.contentContainer{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-flow: row wrap;
+}
+.contentDiv{
+    max-width: 32%;
+    width: 32%;
+    height: auto;
+    background-color: #252525;
+    margin: 5px;
+    position: relative;
+    box-shadow: -10px 10px 30px 0 #000000;
+}
+.srcContentPic{
+    width: 100%;
+}
+.contentBottomFlowDiv{
+    opacity: 0;
+    width: 100%;
+    height: 0;
+    background-image: linear-gradient(to bottom, transparent, #5A5A5A);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+}
+.contentDiv:hover > .contentBottomFlowDiv{
+    opacity: 1;
+    height: 50px;
+    transition: 0.5s; 
+}
+.picTitle{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.srcPic{
+    height: 100%;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.srcTitle{
+    width: calc(100% - 60px);
+    height: 40px;
+    overflow: hidden;
+    margin-right: 10px;
+
+}
+.srcLikes{
+    height: 100%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+  .logo{
+    height: 20px;
+    width: auto;
+  }
+  .searchContainer{
+    width: 150px;
+  }
+  .contentDiv{
+    min-width: 100%;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .card,
-  .footer {
-    border-color: #222;
-  }
-  .code {
-    background: #111;
-  }
-  .logo img {
-    filter: invert(1);
-  }
-}
