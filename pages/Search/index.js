@@ -3,58 +3,27 @@ import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import like from '../../images/Like.png'
 import source from '../../images/source.png'
+import { isMedia, getMediaLink, getMedia } from '../../Functions/Media'
 
 export const getServerSideProps = async (context) => {
-    const q = context.query.q
-    console.log(q)
-    const name = q
-    const res = await fetch(`https://www.reddit.com/r/${q}.json?limit=25`)
-    const data = await res.json()
-  
-    return {
-      props: {
-        redData: data,
-        name
-      }
+  const q = context.query.q
+  console.log(q)
+  const name = q
+  const res = await fetch(`https://www.reddit.com/r/${q}.json?limit=25`)
+  const data = await res.json()
+
+  return {
+    props: {
+      redData: data,
+      name
     }
   }
+}
   
 
 export default function SubRed( {redData, name} ) {
 
-  const isMedia = (e) => {
-    if(e.includes("png") || e.includes("jpg") ||e.includes("jpeg") || e.includes("gif") || e.includes("mp4")){
-      return true;
-    } 
-    return false
-  }
-
-  const isImage = (e) => {
-    if(e.includes("png") || e.includes("jpg") || e.includes("jpeg") || e.includes(".gif")){
-      return true;
-    } 
-    return false
-  }
-  const isVideo = (e) => {
-    if(e.includes("redgif") || e.includes("mp4") || e.includes("gifv")){
-      return true;
-    } 
-    return false
-  }
-
-  const getMedia = (e) => {
-    if(isVideo(e.url) && (typeof(e.preview.reddit_video_preview) !== "undefined")){
-      return (<video src={e.preview.reddit_video_preview.fallback_url} preload='auto' controls className={styles.srcContentPic}/>)
-    }
-    else if(isImage(e.url) && (typeof(e.url) !== "undefined")){
-      return (<img src={e.url} alt='pic' className={styles.srcContentPic}/>)
-    }
-    
-  }
-
-  const getMediaLink = (e) => {
-    return getMedia(e).props.src
-  }
+  
 
   return (
     <div className={styles.container}>

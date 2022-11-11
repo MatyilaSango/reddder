@@ -3,9 +3,9 @@ import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import like from '../../images/Like.png'
 import source from '../../images/source.png'
+import { getPreviewMedia } from '../../Functions/Media'
 
 export const getServerSideProps = async (context) => {
-    console.log(context)
   
     return {
       props: {
@@ -15,32 +15,10 @@ export const getServerSideProps = async (context) => {
         lsource: context.query.s,
       }
     }
-  }
+}
   
 
 export default function SubRed( {mediaLink, title, likes, lsource} ) {
-    
-    const isImage = (e) => {
-        if(e.includes("png") || e.includes("jpg") ||e.includes("jpeg")){
-            return true;
-        } 
-        return false
-      }
-    const isVideo = (e) => {
-        if(e.includes("redgif") || e.includes("mp4") || e.includes("gifv")){
-            return true;
-        } 
-        return false
-    }
-    
-    const getMedia = (e) => {
-        if(isImage(e)){
-            return (<img src={e} alt='pic' className={styles.srcContentPic}/>)
-        }
-        else if(isVideo(e)) {
-            return (<video src={e} preload='auto' controls vol className={styles.srcContentPic}/>) 
-        }
-    }
 
     return (
         <div className={styles.container}>
@@ -53,7 +31,7 @@ export default function SubRed( {mediaLink, title, likes, lsource} ) {
             <div className={styles.bodyContainer}>
                 <div className={styles.contentPriviewContainer}>
                     <div className={styles.contentPreviewDiv}>
-                        {getMedia(mediaLink)}
+                        {getPreviewMedia(mediaLink)}
 
                     <div className={styles.contentBottomFlowDiv}>
                         <div className={styles.picTitle}>
@@ -78,4 +56,4 @@ export default function SubRed( {mediaLink, title, likes, lsource} ) {
             </div>
         </div>
     )
-    }
+}
