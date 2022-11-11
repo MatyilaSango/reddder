@@ -3,7 +3,7 @@ import { Container, SearchContainer } from '../styles/NavBarStyles'
 import Image from 'next/image'
 import redder from '../images/Reddder.png'
 import search from '../images/Search.png'
-import { React, useEffect } from 'react'
+import { React } from 'react'
 import { useRouter } from 'next/router'
 
 

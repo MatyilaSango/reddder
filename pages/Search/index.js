@@ -35,7 +35,7 @@ export default function SubRed( {redData, name} ) {
 
       <div className={styles.bodyContainer}>
         <p>{name}:</p>
-        {(typeof(redData.data.children[0]) === "undefined") ? <p>Enter a subreddit!!!</p> :
+        {(typeof(redData.data.children[0]) === "undefined") ? <p>Enter a correct subreddit!!!</p> :
           <div className={styles.contentContainer}>
             {redData.data.children.map((child) => (
               isMedia(child.data.url) &&
