@@ -1,5 +1,4 @@
 import styles from '../styles/Home.module.css'
-import { Container, SearchContainer } from '../styles/NavBarStyles'
 import Image from 'next/image'
 import redder from '../images/Reddder.png'
 import search from '../images/Search.png'
@@ -25,16 +24,16 @@ export default function NarvBar() {
   }
 
   return (
-    <Container className={styles.narvBar}>
+    <div className={styles.narvBar}>
       <Image className={styles.logo} src={redder} alt='Reddder' height={40}  onClick={toHome}/>
-      <SearchContainer className={styles.searchContainer}>
+      <div className={styles.searchContainer}>
         <form className={styles.searchForm} onSubmit={searchHandler}>
           <input className={styles.searchInput} type='text' name='r' placeholder='Search...' required />
           <button className={styles.searchButton} type='submit'>
             <Image src={search} alt='search' width={20}/>
           </button>
         </form>
-      </SearchContainer>
-    </Container>
+      </div>
+    </div>
   )
 }
