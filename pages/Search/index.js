@@ -10,7 +10,6 @@ import { useRouter } from 'next/router'
 
 export const getServerSideProps = async (context) => {
   const name = context.query.q
-  const ns = context.query.ns
   const res = await fetch(`https://www.reddit.com/r/${name}.json?limit=25`)
   var data = await res.json()
   data = (data.error !== 404) ? data : await fetch(`https://www.reddit.com/user/${name}.json?limit=25`).then((res) => data = res.json())
@@ -18,7 +17,7 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       redData_: data,
-      name, ns
+      name,
     }
   }
 }
