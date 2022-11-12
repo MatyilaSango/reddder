@@ -23,24 +23,8 @@ export const getStaticProps = async () => {
 
 export default function Home({ redData_ }) {
 
-  const router = useRouter()
   const [redData, setredData] = useState(redData_)
-
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-
-  }, []);
+  const [loading, setLoading] = useState(false)
 
   const loadMoreData = async () => {
 
@@ -55,9 +39,15 @@ export default function Home({ redData_ }) {
     redData.data.dist += newdata.data.dist
     setredData(redData)
 
-    router.push(`/`);
-    window.scrollY = scrollY
+    setLoading(true)
+
   }
+
+  useEffect(() => {
+    setredData(redData)
+    setLoading(false)
+  },[loading])
+
 
   return (
     <div className={styles.container}>

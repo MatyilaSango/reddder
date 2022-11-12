@@ -9,45 +9,51 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 export const getServerSideProps = async (context) => {
-  const q = context.query.q
-  const name = q
-  const res = await fetch(`https://www.reddit.com/r/${q}.json?limit=25`)
+  const name = context.query.q
+  const ns = context.query.ns
+  const res = await fetch(`https://www.reddit.com/r/${name}.json?limit=25`)
   var data = await res.json()
-  data = (data.error !== 404) ? data : await fetch(`https://www.reddit.com/user/${q}.json?limit=25`).then((res) => data = res.json())
+  data = (data.error !== 404) ? data : await fetch(`https://www.reddit.com/user/${name}.json?limit=25`).then((res) => data = res.json())
 
   return {
     props: {
       redData_: data,
-      name
+      name, ns
     }
   }
 }
   
 
 export default function SubRed( {redData_, name} ) {
-  const router = useRouter()
   const [redData, setredData] = useState(redData_)
+  const [loading, setLoading] = useState(false)
 
-    const loadMoreData = async () => {
+  const loadMoreData = async () => {
 
-      const res = await fetch(`https://www.reddit.com/r/${name}.json?limit=25&after=${redData.data.after}`)
-      var newdata = await res.json()
-      newdata = (newdata.error !== 404) ? newdata : await fetch(`https://www.reddit.com/user/${name}.json?limit=25&after=${redData.data.after}`)
+    const res = await fetch(`https://www.reddit.com/r/${name}.json?limit=25&after=${redData.data.after}`)
+    var newdata = await res.json()
+    newdata = (newdata.error !== 404) ? newdata : await fetch(`https://www.reddit.com/user/${name}.json?limit=25&after=${redData.data.after}`)
 
-      try{
-        newdata = await newdata.json()
-      }catch{}
- 
-      newdata.data.children.map((c) => {
-        setredData(redData.data.children.push(c))
-      })
+    try{
+      newdata = await newdata.json()
+    }catch{}
 
-      redData.data.after = newdata.data.after
-      redData.data.dist += newdata.data.dist
-      setredData(redData)
+    newdata.data.children.map((c) => {
+      setredData(redData.data.children.push(c))
+    })
 
-      router.push(`/Search?q=${name}`);
-    } 
+    redData.data.after = newdata.data.after
+    redData.data.dist += newdata.data.dist
+    setredData(redData)
+
+    setLoading(true)
+  } 
+
+  //useEffect for load more items
+  useEffect(() => {
+    setredData(redData)
+    setLoading(false)
+  },[loading])
 
   return (
     <div className={styles.container}>
