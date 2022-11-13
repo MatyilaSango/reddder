@@ -6,7 +6,6 @@ import source from '../../images/source.png'
 import Down from '../../images/Down.png'
 import { isMedia, getMediaLink, getMedia } from '../../Functions/Media'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 
 export const getServerSideProps = async (context) => {
   const name = context.query.q
