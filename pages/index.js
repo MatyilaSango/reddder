@@ -8,7 +8,6 @@ import { isMedia, getMedia, getMediaLink } from '../Functions/Media'
 import { useState, useEffect } from 'react'
 
 
-
 export const getStaticProps = async () => {
   const res = await fetch("https://www.reddit.com/r/popular.json?limit=25")
   const data = await res.json()
@@ -91,7 +90,9 @@ export default function Home({ redData_ }) {
           </div>
         }
       </div>
-      <Image src={Down} className={styles.loadMoreButton} alt='pic' width={40} onClick={loadMoreData}/>
+      <div className={styles.loadMoreContainer}>
+        <Image src={Down} className={styles.loadMoreButton} alt='pic' width={40} onClick={loadMoreData}/>
+      </div>
     </div>
   )
 }
