@@ -155,7 +155,8 @@
     cursor: pointer;
 }
 
-.loadMoreContainer{
+.loadMoreContainer,
+.footerContainer{
     width: 100%;
     height: 50px;
     display: flex;
