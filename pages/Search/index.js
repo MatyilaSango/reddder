@@ -96,9 +96,8 @@ export default function SubRed( {redData_, name} ) {
           </div>
         }
       </div>
-      <div className={styles.loadMoreContainer}>
-        <Image src={Down} className={styles.loadMoreButton} alt='pic' width={40} onClick={loadMoreData}/>
-      </div>
+
+      <Image src={Down} className={styles.loadMoreButton} alt='pic' width={40} onClick={loadMoreData}/>
     </div>
     
   )

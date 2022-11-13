@@ -54,6 +54,7 @@ export default function SubRed( {mediaLink, title, likes, lsource} ) {
                     </div>
                 </div>
             </div>
+
         </div>
     )
 }

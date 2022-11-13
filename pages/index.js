@@ -5,8 +5,8 @@ import like from '../images/Like.png'
 import source from '../images/source.png'
 import Down from '../images/Down.png'
 import { isMedia, getMedia, getMediaLink } from '../Functions/Media'
-import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+
 
 
 export const getStaticProps = async () => {
@@ -91,9 +91,7 @@ export default function Home({ redData_ }) {
           </div>
         }
       </div>
-      <div className={styles.loadMoreContainer}>
-        <Image src={Down} className={styles.loadMoreButton} alt='pic' width={40} onClick={loadMoreData}/>
-      </div>
+      <Image src={Down} className={styles.loadMoreButton} alt='pic' width={40} onClick={loadMoreData}/>
     </div>
   )
 }
