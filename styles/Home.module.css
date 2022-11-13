@@ -178,7 +178,8 @@
     right: 3rem;
 }
 
-.ptLink{
+.ptLink,
+.disclaimer{
     position: relative;
     color: rgba(255, 255, 255, 0.7);
     font-size: 13px;
@@ -226,6 +227,11 @@
 
 .emailContainer{
     top: 3px;
+}
+
+.disclaimer{
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: default;
 }
 
 @media screen and (max-width: 800px) {
