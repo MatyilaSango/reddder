@@ -31,7 +31,7 @@ export default function Home() {
       <Head>
         <title>Contact me</title>
         <meta name="description" content="Get in touch with me." />
-        <link rel="icon" href="/mypic1.jpg" />
+        <link rel="icon" href="/Reddder.png" type='png' />
       </Head>
 
       <div className={styles.bodyContainer}>  
