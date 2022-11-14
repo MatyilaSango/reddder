@@ -26,5 +26,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Deployed on Vercel
 
-Link to the site: [reddder-matyilasango.vercel.app](reddder-matyilasango.vercel.app)
+Link to the site: [https://reddder.vercel.app/](https://reddder.vercel.app/)
 
