@@ -1,249 +1,290 @@
-.layout{
-    width: 100vw;
+.layout {
+  width: 100vw;
 }
 
-.narvBar{
-    width: 100%;
-    height: 84px;
-    background-color: #222222;
-    display: flex;
-    align-items: center;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    justify-content: space-between;
-    box-shadow: 0 10px 30px 0 #000000;
+.narvBar {
+  width: 100%;
+  height: 84px;
+  background-color: #222222;
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px 0 #000000;
 }
 
-.searchForm{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
+.searchForm {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 100;
+  border-radius: 15px;
+  position: relative;
+  z-index: 300;
 }
 
-.searchInput{
-    width: calc(100% - 30px);
-    height: 100%;
-    background-color: transparent;
-    border: none;
-    color: white;
+.searchInput {
+  width: calc(100% - 30px);
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  color: white;
 }
 
-.searchInput:focus{
-    border: none;
-    outline: none;
+.searchInput:focus {
+  border: none;
+  outline: none;
 }
 
-.searchContainer{
-    width: 300px;
-    height: 30px;
-    border: 1px solid #E67058;
-    background-color: transparent;
-    border-radius: 15px;
-    padding-left: 10px;
+.searchContainer {
+  width: 300px;
+  height: 30px;
+  border: 1px solid #e67058;
+  background-color: transparent;
+  border-radius: 15px;
+  position: relative;
+  padding-left: 10px;
 }
 
-.searchButton{
-    background-color: transparent;
-    width: auto;
-    padding: 0;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    border-radius: 30px;
-}
-.searchButton:active{
-    background-color: rgba(255, 255, 255, 0.224);
+.searchItemsContainer {
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  width: calc(100% - 20px);
+  max-height: 150px;
+  background-color: #292a2d;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  padding: 10px;
+  box-shadow: 0 10px 10px #25252570;
+  z-index: 100;
+  display: none;
+  overflow-y: hidden;
 }
 
-.bodyContainer{
-    width: 100vw;
-    min-height: 100vh;
-    padding: 0 2rem;
-    padding-top: 10px;
+.searchContainer:focus > .searchItemsContainer {
+  display: block;
+}
+
+.searchItem {
+  width: 100%;
+  height: 30px;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0 5px;
+}
+
+.searchItem:hover {
+  background-color: #3f4042;
+  cursor: pointer;
+}
+
+.searchButton {
+  background-color: transparent;
+  width: auto;
+  padding: 0;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 30px;
+}
+.searchButton:active {
+  background-color: rgba(255, 255, 255, 0.224);
+}
+
+.bodyContainer {
+  width: 100vw;
+  min-height: 100vh;
+  padding: 0 2rem;
+  padding-top: 10px;
 }
 
 .contentContainer,
-.contentPriviewContainer{
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-flow: row wrap;
+.contentPriviewContainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-flow: row wrap;
 }
 
-.contentPriviewContainer{
-    justify-content: center;
-    height: auto;
+.contentPriviewContainer {
+  justify-content: center;
+  height: auto;
 }
 
-.contentDiv{
-    max-width: 32%;
-    width: 32%;
-    height: auto;
-    background-color: #252525;
-    margin: 5px;
-    position: relative;
-    box-shadow: 0px 0px 30px 5px #000000;
+.contentDiv {
+  max-width: 32%;
+  width: 32%;
+  height: auto;
+  background-color: #252525;
+  margin: 5px;
+  position: relative;
+  box-shadow: 0px 0px 30px 5px #000000;
 }
 
-.contentPreviewDiv{
-    max-height: auto;
-    width: auto;
-    background-color: #252525;
-    margin: 5px;
-    position: relative;
-    box-shadow: 0px 0px 30px 5px #000000;
+.contentPreviewDiv {
+  max-height: auto;
+  width: auto;
+  background-color: #252525;
+  margin: 5px;
+  position: relative;
+  box-shadow: 0px 0px 30px 5px #000000;
 }
 
-.contentPreviewDiv:hover > .contentBottomFlowDiv{
-    opacity: 1;
-    height: 50px;
-    transition: 0.5s; 
+.contentPreviewDiv:hover > .contentBottomFlowDiv {
+  opacity: 1;
+  height: 50px;
+  transition: 0.5s;
 }
 
-.srcContentPic{
-    width: 100%;
+.srcContentPic {
+  width: 100%;
 }
 
-.contentBottomFlowDiv{
-    opacity: 0;
-    width: 100%;
-    height: 0;
-    background-image: linear-gradient(to bottom, transparent, #5A5A5A);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    justify-content: space-between;
+.contentBottomFlowDiv {
+  opacity: 0;
+  width: 100%;
+  height: 0;
+  background-image: linear-gradient(to bottom, transparent, #5a5a5a);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
 }
 
-.contentDiv:hover > .contentBottomFlowDiv{
-    opacity: 1;
-    height: 50px;
-    transition: 0.5s; 
+.contentDiv:hover > .contentBottomFlowDiv {
+  opacity: 1;
+  height: 50px;
+  transition: 0.5s;
 }
 
-.picTitle{
-    width: 80%;
-    height: 100%;
-    display: flex;
-    align-items: center;
+.picTitle {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
-.srcPic{
-    height: 100%;
-    width: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+.srcPic {
+  height: 100%;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.srcTitle{
-    width: calc(100% - 60px);
-    height: 40px;
-    overflow: hidden;
-    margin-right: 10px;
-}
-
-.srcLikes{
-    height: 100%;
-    width: 20%;
-    display: flex;
-    align-items: center;
+.srcTitle {
+  width: calc(100% - 60px);
+  height: 40px;
+  overflow: hidden;
+  margin-right: 10px;
 }
 
-.logo{
-    cursor: pointer;
+.srcLikes {
+  height: 100%;
+  width: 20%;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  cursor: pointer;
 }
 
 .loadMoreContainer,
-.footerContainer{
-    width: 100%;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    padding: 0 3rem;
-    position: relative;
+.footerContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 3rem;
+  position: relative;
+}
+.loadMoreContainer {
+  height: 50px;
 }
 
-.footerContainer{
-    flex-flow: row wrap;
+.footerContainer {
+  flex-flow: row wrap;
+  background-color: rgb(47, 47, 47);
+  top: 25px;
+  min-height: 50px;
+  box-shadow: 0 -10px 30px 0 #000000;
 }
 
-.loadMoreButton{
-    box-shadow: 0px 0px 30px 10px #000000;
-    cursor: pointer;
-    border-radius: 25px;
-    border: 1px solid #E67058;
-    position: absolute;
-    right: 3rem;
+.loadMoreButton {
+  box-shadow: 0px 0px 30px 10px #000000;
+  cursor: pointer;
+  border-radius: 25px;
+  border: 1px solid #e67058;
+  position: absolute;
+  right: 3rem;
 }
 
 .ptLink,
-.disclaimer{
-    position: relative;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 13px;
-    margin: 5px;
-    cursor: pointer;
+.disclaimer {
+  position: relative;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  margin: 5px;
+  cursor: pointer;
 }
 
-.emailForm{
-    width: 300px;
-  }
+.emailForm {
+  width: 300px;
+}
 
 .emailInput,
 .emailTextArea,
-.emailSend{
-    width: 100%;
-    height: 40px;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 5px;
-    border: 2px solid #E67058;
-    background-color: #222222;
-    color: white;
+.emailSend {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  border: 2px solid #e67058;
+  background-color: #222222;
+  color: white;
 }
 
 .emailInput:focus,
-.emailTextArea:focus{
-    outline: none;
+.emailTextArea:focus {
+  outline: none;
 }
 
-.emailTextArea{
-    height: 200px;
+.emailTextArea {
+  height: 200px;
 }
 
-.emailSend:hover{
-    background-color: #E67058;
-    border: 2px solid #ffffff;
-    cursor: pointer;
-    }
+.emailSend:hover {
+  background-color: #e67058;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+}
 
 .emailContainer,
 .phoneContainer,
-.whatsappContainer{
-    position: absolute;
+.whatsappContainer {
+  position: absolute;
 }
 
-.emailContainer{
-    top: 3px;
+.emailContainer {
+  top: 3px;
 }
 
-.disclaimer{
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    cursor: default;
+.disclaimer {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: default;
 }
 
 @media screen and (max-width: 800px) {
-    .logo{
-        height: 20px;
-        width: auto;
-    }
-    .searchContainer{
-        width: 150px;
-    }
-    .contentDiv{
-        min-width: 100%;
-    }
+  .logo {
+    height: 20px;
+    width: auto;
+  }
+  .searchContainer {
+    width: 150px;
+  }
+  .contentDiv {
+    min-width: 100%;
+  }
 }
-

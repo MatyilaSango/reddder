@@ -67,7 +67,7 @@ export default function Home({ redData_ }) {
                       href={`/Preview?l=${getMediaLink(child.data)}&t=${
                         child.data.title
                       }&u=${child.data.ups}&s=${
-                        "https://www.reddit.com/" + child.data.permalink
+                        "https://www.reddit.com" + child.data.permalink
                       }`}
                     >
                       {getMedia(child.data)}
@@ -78,7 +78,7 @@ export default function Home({ redData_ }) {
                         <div className={styles.srcPic}>
                           <a
                             href={
-                              "https://www.reddit.com/" + child.data.permalink
+                              "https://www.reddit.com" + child.data.permalink
                             }
                             target="_blank"
                           >

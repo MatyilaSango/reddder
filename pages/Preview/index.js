@@ -33,7 +33,7 @@ export default function SubRed({ mediaLink, title, likes, lsource }) {
                         <div className={styles.contentBottomFlowDiv}>
                             <div className={styles.picTitle}>
                                 <div className={styles.srcPic}>
-                                    <a href={"https://www.reddit.com/" + lsource} target="_blank">
+                                    <a href={lsource} target="_blank">
                                         <Image src={source} alt="pic" width={40} />
                                     </a>
                                 </div>

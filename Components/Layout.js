@@ -1,12 +1,12 @@
 import React from "react";
 import Footer from "./Footer";
-import NarvBar from "./NarvBar";
+import NavBar from "./NavBar";
 import styles from "/styles/Home.module.css";
 
 export default function Layout({ children }) {
   return (
     <div className={styles.layout}>
-      <NarvBar />
+      <NavBar />
       {children}
       <Footer />
     </div>

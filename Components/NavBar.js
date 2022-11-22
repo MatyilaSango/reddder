@@ -43,6 +43,9 @@ export default function NarvBar() {
             <Image src={search} alt="search" width={20} />
           </button>
         </form>
+        <div className={styles.searchItemsContainer}>
+          <div className={styles.searchItem}>abcdefg</div>
+        </div>
       </div>
     </div>
   );

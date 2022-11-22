@@ -29,8 +29,8 @@ export default function Footer() {
       </p>
       <br />
       <p className={styles.disclaimer}>
-        Reddder does not store any files on our server, we only linked to the
-        media which is hosted on Reddit.
+        &nbsp; Reddder does not store any files on our server, we only linked to
+        the media which is hosted on Reddit. &nbsp;
       </p>
     </div>
   );
