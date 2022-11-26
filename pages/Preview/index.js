@@ -22,6 +22,12 @@ export default function SubRed({ mediaLink, title, likes, lsource }) {
             <Head>
                 <title>{title}</title>
                 <meta name="description" content="Priview content." />
+                <meta property="og:site_name" content="Reddder" />
+                <meta property="og:url" content='https://reddder.vercel.app/Preview?l=https://i.redd.it/kb5n9emrgu1a1.jpg&t=What%E2%80%99s%20with%20men?&u=41711&s=https://www.reddit.com/r/WhitePeopleTwitter/comments/z36tt9/whats_with_men/' />
+                <meta property="og:title" content={title} />
+                <meta property="og:image" content={mediaLink} />
+                <meta property="og:image:width" content="1280" />
+                <meta property="og:image:height" content="720" />
                 <link rel="icon" href="/Reddder.png" type="png" />
             </Head>
 
