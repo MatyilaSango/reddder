@@ -12,18 +12,19 @@ export const getServerSideProps = async (context) => {
             title: context.query.t,
             likes: context.query.u,
             lsource: context.query.s,
+            meta_url: 'https://reddder.vercel.app/Preview?l='+context.query.l+'&t='+context.query.t+'&u='+context.query.u+'&s='+context.query.s
         },
     };
 };
 
-export default function SubRed({ mediaLink, title, likes, lsource }) {
+export default function SubRed({ mediaLink, title, likes, lsource, meta_url }) {
     return (
         <div className={styles.container}>
             <Head>
                 <title>{title}</title>
                 <meta name="description" content="Priview content." />
                 <meta property="og:site_name" content="Reddder" />
-                <meta property="og:url" content='https://reddder.vercel.app/Preview?l=https://i.redd.it/kb5n9emrgu1a1.jpg&t=What%E2%80%99s%20with%20men?&u=41711&s=https://www.reddit.com/r/WhitePeopleTwitter/comments/z36tt9/whats_with_men/' />
+                <meta property="og:url" content= {meta_url} />
                 <meta property="og:title" content={title} />
                 <meta property="og:image" content={mediaLink} />
                 <meta property="og:image:width" content="1280" />
