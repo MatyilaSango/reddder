@@ -39,6 +39,6 @@ next-env.d.ts
 **/public/sw.js
 **/public/workbox-*.js
 **/public/worker-*.js
-**/public/sw.js.mpa
-**/public/workbox-*.js.mpa
-**/public/worker-*.js.mpa
+**/public/sw.js.mam
+**/public/workbox-*.js.map
+**/public/worker-*.js.map
