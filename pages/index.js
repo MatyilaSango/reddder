@@ -86,7 +86,7 @@ export default function Home({ redData_ }) {
                           </a>
                         </div>
                         <div className={styles.srcTitle}>
-                          <>{child.data.title}</>
+                          {child.data.title}
                         </div>
                       </div>
 
