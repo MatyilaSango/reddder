@@ -48,6 +48,28 @@
   padding-left: 10px;
 }
 
+.pleaseWaitLableText{
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  animation: animatePleaseWait 3s infinite linear;
+}
+
+@keyframes animatePleaseWait {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .searchItemsContainer {
   position: absolute;
   top: 30px;
@@ -198,6 +220,7 @@
 }
 .loadMoreContainer {
   height: 50px;
+  border-radius: 25px;
 }
 
 .footerContainer {
@@ -215,6 +238,10 @@
   border: 1px solid #e67058;
   position: absolute;
   right: 3rem;
+}
+
+.loadMoreButton:active{
+  background-color: rgba(255, 255, 255, 0.224);
 }
 
 .ptLink,
