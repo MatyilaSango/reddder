@@ -4,6 +4,7 @@ import styles from "../styles/Home.module.css";
 import like from "../images/Like.png";
 import source from "../images/source.png";
 import Down from "../images/Down.png";
+import ReddderPic from '../public/Reddder.png'
 import { isMedia, getMedia, getMediaLink } from "../Functions/Media";
 import { useState, useEffect } from "react";
 
@@ -49,7 +50,13 @@ export default function Home({ redData_ }) {
     <div className={styles.container}>
       <Head>
         <title>Home</title>
-        <meta name="description" content="Viewing popular posts" />
+        <meta name="description" content="Explore popular videos and pictures." />
+        <meta property="og:site_name" content="Reddder" />
+        <meta property="og:url" content= "https://reddder.vercel.app/" />
+        <meta property="og:title" content="Reddder" />
+        <meta property="og:image" content={ReddderPic} />
+        <meta property="og:image:width" content="1280" />
+        <meta property="og:image:height" content="720" />
         <link rel="icon" href="/Reddder.png" type="png" />
       </Head>
 
