@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css";
 import like from "../images/Like.png";
 import source from "../images/source.png";
 import Down from "../images/Down.png";
-import ReddderPic from '../public/Reddder.png'
+import ReddderPic from '../images/Reddder.png'
 import { isMedia, getMedia, getMediaLink } from "../Functions/Media";
 import { useState, useEffect } from "react";
 
