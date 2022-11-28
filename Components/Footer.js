@@ -12,6 +12,7 @@ export default function Footer() {
 
   return (
     <div className={styles.footerContainer}>
+      <label className={styles.ptLink}>© {Date().split(" ")[3]} Reddder </label>
       <Link
         href="https://www.freeprivacypolicy.com/live/4d169eb0-07ab-4566-b202-5e926814f007"
         className={styles.ptLink}

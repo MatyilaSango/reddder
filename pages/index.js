@@ -49,9 +49,12 @@ export default function Home({ redData_ }) {
     <div className={styles.container}>
       <Head>
         <title>Home</title>
-        <meta name="description" content="Explore popular videos and pictures." />
+        <meta
+          name="description"
+          content="Explore popular videos and pictures."
+        />
         <meta property="og:site_name" content="Reddder" />
-        <meta property="og:url" content= "https://reddder.vercel.app/" />
+        <meta property="og:url" content="https://reddder.vercel.app/" />
         <meta property="og:title" content="Reddder" />
         <meta property="og:image" content="/Reddder.png" />
         <meta property="og:image:width" content="1280" />
@@ -72,7 +75,7 @@ export default function Home({ redData_ }) {
                     <a
                       href={`/Preview?l=${getMediaLink(child.data)}&t=${
                         child.data.title
-                      }&u=${child.data.ups}&s=${
+                      }&a=${child.data.author}&u=${child.data.ups}&s=${
                         "https://www.reddit.com" + child.data.permalink
                       }`}
                     >
@@ -89,6 +92,11 @@ export default function Home({ redData_ }) {
                             target="_blank"
                           >
                             <Image src={source} alt="pic" width={40} />
+                          </a>
+                        </div>
+                        <div className={styles.usernameText}>
+                          <a href={`/Search?q=${child.data.author}`}>
+                            @{child.data.author}
                           </a>
                         </div>
                         <div className={styles.srcTitle}>

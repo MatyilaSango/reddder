@@ -12,7 +12,7 @@ export const getServerSideProps = async (context) => {
   const res = await fetch(`https://www.reddit.com/r/${name}.json?limit=25`);
   var data = await res.json();
   data =
-    data.error !== 404
+    data.data.dist !== 0
       ? data
       : await fetch(`https://www.reddit.com/user/${name}.json?limit=25`).then(
           (res) => (data = res.json())
@@ -32,14 +32,14 @@ export default function SubRed({ redData_, name }) {
 
   const loadMoreData = async () => {
     const res = await fetch(
-      `https://www.reddit.com/r/${name}.json?limit=25&after=${redData.data.after}`
+      `https://www.reddit.com/user/${name}.json?limit=25&after=${redData.data.after}`
     );
     var newdata = await res.json();
     newdata =
-      newdata.error !== 404
+      newdata.error !== 403
         ? newdata
         : await fetch(
-            `https://www.reddit.com/user/${name}.json?limit=25&after=${redData.data.after}`
+            `https://www.reddit.com/r/${name}.json?limit=25&after=${redData.data.after}`
           );
 
     try {
@@ -85,7 +85,7 @@ export default function SubRed({ redData_, name }) {
                     <a
                       href={`/Preview?l=${getMediaLink(child.data)}&t=${
                         child.data.title
-                      }&u=${child.data.ups}&s=${
+                      }&a=${child.data.author}&u=${child.data.ups}&s=${
                         "https://www.reddit.com/" + child.data.permalink
                       }`}
                     >
@@ -102,6 +102,11 @@ export default function SubRed({ redData_, name }) {
                             target="_blank"
                           >
                             <Image src={source} alt="pic" width={40} />
+                          </a>
+                        </div>
+                        <div className={styles.usernameText}>
+                          <a href={`/Search?q=${child.data.author}`}>
+                            @{child.data.author}
                           </a>
                         </div>
                         <div className={styles.srcTitle}>

@@ -167,9 +167,14 @@
   align-items: center;
   justify-content: center;
 }
+.usernameText{
+  margin: 10px;
+  cursor: pointer;
+}
 .srcTitle {
   width: calc(100% - 60px);
   margin-left: 10px;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .srcLikes {

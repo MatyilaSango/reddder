@@ -12,12 +12,13 @@ export const getServerSideProps = async (context) => {
             title: context.query.t,
             likes: context.query.u,
             lsource: context.query.s,
+            author: context.query.a,
             meta_url: 'https://reddder.vercel.app/Preview?l='+context.query.l+'&t='+context.query.t+'&u='+context.query.u+'&s='+context.query.s
         },
     };
 };
 
-export default function SubRed({ mediaLink, title, likes, lsource, meta_url }) {
+export default function SubRed({ mediaLink, title, likes, lsource, meta_url, author }) {
     return (
         <div className={styles.container}>
             <Head>
@@ -44,10 +45,16 @@ export default function SubRed({ mediaLink, title, likes, lsource, meta_url }) {
                                         <Image src={source} alt="pic" width={40} />
                                     </a>
                                 </div>
+                                <div className={styles.usernameText}>
+                                    <a href={`/Search?q=${author}`}>
+                                        @{author}
+                                    </a>
+                                </div>
                                 <div className={styles.srcTitle}>
                                     <>{title}</>
                                 </div>
                             </div>
+                            
 
                             <div className={styles.srcLikes}>
                                 <Image src={like} alt="pic" width={25} />
