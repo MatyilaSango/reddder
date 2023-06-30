@@ -25,6 +25,18 @@
   z-index: 300;
 }
 
+.searchFormSelect{
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: #e67058;
+  height: 100%;
+}
+
+.searchFormSelectOption{
+  background-color: #2c2c2c;
+}
+
 .searchInput {
   width: calc(100% - 30px);
   height: 100%;
@@ -36,6 +48,7 @@
 .searchInput:focus {
   border: none;
   outline: none;
+  background-color: transparent;
 }
 
 .searchContainer {

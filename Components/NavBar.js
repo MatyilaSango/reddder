@@ -8,16 +8,19 @@ import { useRouter } from "next/router";
 export default function NarvBar() {
   const router = useRouter();
   const pleaseWaitRef = useRef("");
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const searchHandler = async (e) => {
     e.preventDefault();
-    if (!e.currentTarget.elements[0].name) return;
-    const param = e.currentTarget.elements[0].value;
 
-    setIsLoading(true)
+    console.log(e.currentTarget.elements)
+    if (!e.currentTarget.elements[1].name) return;
+    const param = e.currentTarget.elements[1].value;
+    const acc_type = e.currentTarget.elements[0].value
 
-    await router.push(`/Search/?q=${param}`);
+    setIsLoading(true);
+
+    await router.push(`/Search/?q=${param}&t=${acc_type}`);
     router.reload();
   };
 
@@ -27,7 +30,7 @@ export default function NarvBar() {
 
   useEffect(() => {
     pleaseWaitRef.current = "Please wait...";
-  }, [isLoading])
+  }, [isLoading]);
 
   return (
     <div className={styles.narvBar}>
@@ -40,6 +43,10 @@ export default function NarvBar() {
       />
       <div className={styles.searchContainer}>
         <form className={styles.searchForm} onSubmit={searchHandler}>
+          <select className={styles.searchFormSelect}  name="acc_type" id="acc_type">
+            <option className={styles.searchFormSelectOption} value="subreddit">Subreddit</option>
+            <option className={styles.searchFormSelectOption} value="user">User</option>
+          </select>
           <input
             className={styles.searchInput}
             type="text"

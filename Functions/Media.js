@@ -47,7 +47,7 @@ export const getMedia = (e) => {
         />
       );
     } else if (isImage(e.url) && typeof e.url !== "undefined") {
-      return <img src={e.url} alt="pic" className={styles.srcContentPic} />;
+      return <img src={e.url} alt="pic" className={styles.srcContentPic} loading="lazy"/>;
     }
   } catch {}
 };
@@ -58,7 +58,6 @@ export const getPreviewMedia = (e) => {
     return (
       <video
         src={e}
-        preload="auto"
         controls
         vol
         className={styles.srcContentPic}

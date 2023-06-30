@@ -6,50 +6,79 @@ import source from "../../images/source.png";
 import Down from "../../images/Down.png";
 import { isMedia, getMediaLink, getMedia } from "../../Functions/Media";
 import { useEffect, useState } from "react";
+import axios from "axios";
+
+export async function getDataExt(_username, acc_type, lastPostAfter) {
+  return await axios.get(
+    lastPostAfter !== ""
+      ? `https://www.reddit.com/${acc_type}/${_username}.json?limit=10&after=${lastPostAfter}`
+      : `https://www.reddit.com/${acc_type}/${_username}.json?limit=10`,
+    {
+      headers: {
+        "Clear-Site-Data": "cache",
+      },
+    }
+  );
+}
+
+export async function getDataExternaly(
+  _username,
+  acc_type,
+  lastPostAfter,
+  isLinkFromHere
+) {
+  if (acc_type === "subreddit") acc_type = "r";
+
+  if (isLinkFromHere === "true") {
+    let newdata = getDataExt(_username, "r", "");
+    let newdataRes = await newdata.then((res) => res.data);
+    newdata =
+      (await newdataRes.data.children.length) === 0
+        ? getDataExt(_username, "user", "")
+        : newdata;
+
+    return await newdata;
+  }
+
+  try {
+    return getDataExt(_username, acc_type, lastPostAfter);
+  } catch (AxiosError) {
+    alert(
+      `No such account ${_username} found with type ${acc_type}! ${lastPostAfter}`
+    );
+  }
+}
 
 export const getServerSideProps = async (context) => {
   const name = context.query.q;
-  const res = await fetch(`https://www.reddit.com/r/${name}.json?limit=25`);
-  var data = await res.json();
-  data =
-    data.data.dist !== 0
-      ? data
-      : await fetch(`https://www.reddit.com/user/${name}.json?limit=25`).then(
-          (res) => (data = res.json())
-        );
+  const isSubreddit = context.query.t;
+  const isLinkFromHere = context.query?.lh;
+  var res = getDataExternaly(name, isSubreddit, "", isLinkFromHere);
+  var data = await res.then((res) => res.data);
 
   return {
     props: {
       redData_: data,
       name,
+      isSubreddit,
     },
   };
 };
 
-export default function SubRed({ redData_, name }) {
+export default function SubRed({ redData_, name, isSubreddit }) {
   const [redData, setredData] = useState(redData_);
   const [loading, setLoading] = useState(false);
+  const [lastPostAfter, setlastPostAfter] = useState(redData.data.after);
 
   const loadMoreData = async () => {
-    const res = await fetch(
-      `https://www.reddit.com/user/${name}.json?limit=25&after=${redData.data.after}`
-    );
-    var newdata = await res.json();
-    newdata =
-      newdata.error !== 403
-        ? newdata
-        : await fetch(
-            `https://www.reddit.com/r/${name}.json?limit=25&after=${redData.data.after}`
-          );
-
-    try {
-      newdata = await newdata.json();
-    } catch {}
+    var res = getDataExternaly(name, isSubreddit, lastPostAfter);
+    var newdata = await res.then((res) => res.data);
 
     newdata.data.children.map((c) => {
       setredData(redData.data.children.push(c));
     });
 
+    setlastPostAfter(newdata.data.after);
     redData.data.after = newdata.data.after;
     redData.data.dist += newdata.data.dist;
     setredData(redData);
@@ -105,7 +134,7 @@ export default function SubRed({ redData_, name }) {
                           </a>
                         </div>
                         <div className={styles.usernameText}>
-                          <a href={`/Search?q=${child.data.author}`}>
+                          <a href={`/Search?q=${child.data.author}&lh=true`}>
                             @{child.data.author}
                           </a>
                         </div>
