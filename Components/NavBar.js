@@ -13,7 +13,6 @@ export default function NarvBar() {
   const searchHandler = async (e) => {
     e.preventDefault();
 
-    console.log(e.currentTarget.elements)
     if (!e.currentTarget.elements[1].name) return;
     const param = e.currentTarget.elements[1].value;
     const acc_type = e.currentTarget.elements[0].value
