@@ -11,11 +11,16 @@ export default function BodyContainer({ redData, name }) {
       typeof redData.data.children[0] === "undefined" ? (
         <p>Enter a correct subreddit or username !!!</p>
       ) : (
-        <div className={styles.contentContainer}>
+        <article className={styles.contentContainer}>
           {redData.data.children.map(
-            (child) => isMedia(child.data.url) && <Content child={child} />
+            (child) =>
+              isMedia(child.data.url) && (
+                <section>
+                  <Content child={child} />
+                </section>
+              )
           )}
-        </div>
+        </article>
       )}
     </div>
   );

@@ -25,7 +25,7 @@
   z-index: 300;
 }
 
-.searchFormSelect{
+.searchFormSelect {
   outline: none;
   border: none;
   background-color: transparent;
@@ -33,7 +33,7 @@
   height: 100%;
 }
 
-.searchFormSelectOption{
+.searchFormSelectOption {
   background-color: #2c2c2c;
 }
 
@@ -61,7 +61,7 @@
   padding-left: 10px;
 }
 
-.pleaseWaitLableText{
+.pleaseWaitLableText {
   position: absolute;
   bottom: -25px;
   left: 50%;
@@ -75,9 +75,11 @@
   0% {
     opacity: 0;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
@@ -99,7 +101,7 @@
   overflow-y: hidden;
 }
 
-.searchContainer:focus > .searchItemsContainer {
+.searchContainer:focus>.searchItemsContainer {
   display: block;
 }
 
@@ -124,6 +126,7 @@
   cursor: pointer;
   border-radius: 30px;
 }
+
 .searchButton:active {
   background-color: rgba(255, 255, 255, 0.224);
 }
@@ -135,19 +138,13 @@
   padding-top: 10px;
 }
 
-.contentContainer,
-.contentPriviewContainer {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
+.contentContainer {
+  columns: 3;
 }
 
 .contentDiv {
-  max-width: 32%;
-  width: 32%;
-  height: 100%;
+  width: 100%;
+  height: auto;
   background-color: #252525;
   margin: 5px;
   position: relative;
@@ -180,13 +177,14 @@
   align-items: center;
 }
 
-.contentPreviewDiv:hover > .contentBottomFlowDiv,
-.contentDiv:hover > .contentBottomFlowDiv {
+.contentPreviewDiv:hover>.contentBottomFlowDiv,
+.contentDiv:hover>.contentBottomFlowDiv {
   opacity: 1;
   height: auto;
   padding-bottom: 20px;
   transition: 0.5s;
 }
+
 .contentDiv a:hover .contentBottomFlowDiv {
   bottom: 80px;
 }
@@ -195,6 +193,7 @@
   width: 80%;
   height: 20%;
 }
+
 .srcPic {
   height: 100%;
   width: 60px;
@@ -202,10 +201,12 @@
   align-items: center;
   justify-content: center;
 }
-.usernameText{
+
+.usernameText {
   margin: 10px;
   cursor: pointer;
 }
+
 .srcTitle {
   width: calc(100% - 60px);
   margin-left: 10px;
@@ -231,6 +232,7 @@
   padding: 0 3rem;
   position: relative;
 }
+
 .loadMoreContainer {
   height: 50px;
   border-radius: 25px;
@@ -253,7 +255,7 @@
   right: 3rem;
 }
 
-.loadMoreButton:active{
+.loadMoreButton:active {
   background-color: rgba(255, 255, 255, 0.224);
 }
 
@@ -318,16 +320,23 @@
     height: 20px;
     width: auto;
   }
+
   .searchContainer {
     width: 150px;
   }
+
   .contentDiv {
     min-width: 100%;
+  }
+
+  .contentContainer,
+  .contentPriviewContainer {
+    columns: 1;
   }
 }
 
 @media screen and (min-width: 800px) and (max-width: 1080px) {
   .contentDiv {
-    min-width: 48%;  
+    min-width: 48%;
   }
 }
